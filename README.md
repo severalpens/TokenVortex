@@ -6,7 +6,7 @@ Token Vortex is an application that facilitates the transfer of value in the for
  - The client side is an Angular application hosted on Google Cloud via Firebase (free tier).
  - The server side is a Node based Express Generator application hosted on Heroku (free tier).
  - Account and contract data is stored and retrieved from a Mongodb database (free tier).
- - Ethers.js is used to interface with the Ethereum network. Highly recommended. This was an alternative to web3.js that I couldn't get working on Windows.
+ - Ethers.js is used to interface with the Ethereum network. This is a simpler alternative to web3.js.
  - The gas for transactions is funded by the admin account. Ether for the test environments is generated via faucets. ( goerli, rinkeby, ropsten , kovan )
  - The TokenVortex contract was built using inherited ERC20 contracts from OpenZeppelin.
  - The contract was initially compiled using Truffle, flattened using Etherlime, then finally re-compiled and deployed in Remix.
