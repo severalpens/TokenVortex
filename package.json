@@ -1,6 +1,8 @@
 {
   "name": "tokenvortex",
-  "version": "0.0.0",
+  "description": "Ethereum contract management and testing tools",
+  "version": "0.1.0",
+  "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
