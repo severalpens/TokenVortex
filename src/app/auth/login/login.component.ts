@@ -29,8 +29,8 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.username = this.route.snapshot.queryParams['username'] || 'test1';
-        this.password = this.route.snapshot.queryParams['password'] || 'test1';
+     //   this.username = this.route.snapshot.queryParams['username'] || 'test1';
+     //   this.password = this.route.snapshot.queryParams['password'] || 'test1';
         
         this.loginForm = this.formBuilder.group({
                 username: [this.username, Validators.required],

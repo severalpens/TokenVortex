@@ -62,19 +62,17 @@
         </div>
       </li>
 
-      <li class="nav-item dropdown  active">
+      <li hidden class="nav-item dropdown  active">
         <a class="nav-link dropdown-toggle" href="/btc" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           BTC
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div  class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="/btc">BTC</a>
           <a class="dropdown-item" href="/btc/init">Initialize</a>
           <a class="dropdown-item" href="/btc/settings">Settings</a>
           <a class="dropdown-item" href="/btc/transfer">Transfer</a>
         </div>
       </li>
-
-      
     </ul>
   </div>
   <a class="navbar-brand float-right" href="/user">Welcome {{authenticationService.currentUserValue.username}}!</a>
