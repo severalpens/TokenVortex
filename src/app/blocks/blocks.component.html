@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <br>
+      <button type="submit" (click)="reset()" style="margin: 20px;" class="btn btn-danger ">Reset</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <table  class="table">
+        <thead>
+          <tr>
+            <th>Blockchain</th>
+            <th>Source</th>
+            <th>Hash</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor = "let b of blocks; let i=index">
+            <td>{{b.blockchain}}</td>
+            <td>{{b.source}}</td>
+            <td><a href="https://etherscan.io/block/{{b.body.hash}}" target="blank">{{b.body.hash}}</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

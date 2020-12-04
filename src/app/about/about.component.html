@@ -69,7 +69,7 @@ approaches could be applied.
   <li>The server side is a  <a href="https://nodejs.org"  target="blank"> Node</a> based <a href="https://expressjs.com/en/starter/generator.html"  target="blank"> Express Generator </a> application hosted on <a href="https://heroku.com"  target="blank">Heroku</a> (free tier).</li>
   <li>Account and contract data is stored and retrieved from a <a href="https://mongodb.com"  target="blank">Mongodb</a> database (free tier).</li>
 
-  <li><a href="https://www.npmjs.com/package/ethers"  target="blank">Ethers.js</a> is used to interface with the <a href="https://ethereum.org"  target="blank">Ethereum</a> network.  This was a highly recommended alternative to web3.js that I couldn't get working on Windows.</li>
+  <li><a href="https://www.npmjs.com/package/ethers"  target="blank">Ethers.js</a> is used to interface with the <a href="https://ethereum.org"  target="blank">Ethereum</a> network.</li>
 
   <li hidden>The <a href="https://www.investopedia.com/terms/g/gas-ethereum.asp"  target="blank">gas</a> for transactions is funded by the <a href="https://tokenvortex.web.app/accounts/5e7aab7d154a962db45a8520"  target="blank">admin</a> account. </li>
 
@@ -90,13 +90,13 @@ approaches could be applied.
 
 <div>
   <h6>Backlog Tasks</h6>
-  The app needs more work. Here is a list of the features that will be added. Pull requests welcome (contact  <a   href="mailto:severalpens@protonmail.com"  target="blank">severalpens</a> for access).
+  The app needs more work. Here is a list of the features that will be added. Pull requests welcome.
   <ul>
     <li><strong>Capture method outputs:</strong> Outputs from <a href="https://solidity.readthedocs.io/en/v0.7.4/contracts.html?highlight=view#view-functions"  target="blank">view</a> method calls need to be captured and stored in a custom field. The outputs are specified in the <a href="https://solidity.readthedocs.io/en/v0.7.4/abi-spec.html"  target="blank">ABI</a> so the same code used to specify inputs can be used.</li>
     <li><strong>Push transaction updates:</strong> At the moment, a refresh button is supplied to get updates on running transactions. By incorporating <a href="https://rxjs-dev.firebaseapp.com/"  target="blank">RXJS</a> Observables with <a href="https://socket.io/"  target="blank">socket.io</a>, updates will be received as push notifications.</li>
     <li><strong>Run All:</strong> Sequences are currently run manually one method at a time. 'Run all' functionality needs to be added in to fully automate running the sequence.</li>
     <li><strong>Events:</strong> Contract events are also specified in the ABI so capturing these should be similar to capturing 'view' transaction outputs.</li>
-    <li><strong>Results Table:</strong>The results are currently displayed as a JSON dump with an <a href="https://etherscan.io/" target="blank">Etherscan</a> link. A results table is needed to clean up the diplay of transaction results.</li>
+    <li><strong>Results Table:</strong>The results are currently displayed as a JSON dump with an <a href="https://etherscan.io/" target="blank">Etherscan</a> link. A results table is needed to clean up the display of transaction results.</li>
     <li><strong>Compiler:</strong> Incorporate the <a href="https://www.npmjs.com/package/solc" target="blank">solc</a> library to compile contracts</li>
   </ul>
 </div>
