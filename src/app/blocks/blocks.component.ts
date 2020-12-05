@@ -71,20 +71,71 @@ export class BlocksComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
-      this.http.get(`https://tokenvortexapi.herokuapp.com/blocks/eth`).subscribe((blocks: Array<Block>) => {
+      this.http.get(`${environment.apiDomain}/blocks/eth`).subscribe((blocks: Array<Block>) => {
         this.blocks = blocks;
       });
     });
   }
 
-  reset(){
+  refresh(){
+    location.reload();
+  }
+
+  resetEth(){
     this.route.paramMap.subscribe((params) => {
-      this.http.get(`https://tokenvortexapi.herokuapp.com/blocks/eth/reset`).subscribe((result) => {
-        // this.http.get(`http://localhost:9002/blocks/eth/reset`).subscribe((result) => {
+      this.http.get(`${environment.apiDomain}/blocks/eth/reset`).subscribe((result) => {
           location.reload();
       });
     });
   }
+
+  startEth(){
+    this.route.paramMap.subscribe((params) => {
+      this.http.get(`${environment.apiDomain}/blocks/eth/start`).subscribe((result) => {
+          location.reload();
+      });
+    });
+  }
+
+  stopEth(){
+    this.route.paramMap.subscribe((params) => {
+      this.http.get(`${environment.apiDomain}/blocks/eth/stop`).subscribe((result) => {
+          location.reload();
+      });
+    });
+  }
+  
+  parseInt(num: string){
+    return parseInt(num);
+  }
+
+
+  resetBtc(){
+    this.route.paramMap.subscribe((params) => {
+      this.http.get(`${environment.apiDomain}/blocks/btc/reset`).subscribe((result) => {
+          location.reload();
+      });
+    });
+  }
+
+  startBtc(){
+    this.route.paramMap.subscribe((params) => {
+      this.http.get(`${environment.apiDomain}/blocks/btc/start`).subscribe((result) => {
+          location.reload();
+      });
+    });
+  }
+
+  stopBtc(){
+    this.route.paramMap.subscribe((params) => {
+      this.http.get(`${environment.apiDomain}/blocks/btc/stop`).subscribe((result) => {
+          location.reload();
+      });
+    });
+  }
+
+
+
 }
 
 

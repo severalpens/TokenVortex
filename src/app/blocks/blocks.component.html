@@ -1,8 +1,17 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <br>
-      <button type="submit" (click)="reset()" style="margin: 20px;" class="btn btn-danger ">Reset</button>
+      <button type="submit" (click)="refresh()" style="margin: 20px;" class="btn btn-info">Refresh</button>
+    </div>
+    <div class="col">
+      <button type="submit" (click)="startEth()" style="margin: 10px;" class="btn btn-success ">Start Eth</button>
+      <button type="submit" (click)="stopEth()" style="margin: 10px;" class="btn btn-secondary ">Stop Eth</button>
+      <button type="submit" (click)="resetEth()" style="margin: 10px;" class="btn btn-danger ">Reset Eth</button>
+    </div>
+    <div class="col">
+      <button type="submit" (click)="startBtc()" style="margin: 10px;" class="btn btn-success ">Start BTC</button>
+      <button type="submit" (click)="stopBtc()" style="margin: 10px;" class="btn btn-secondary ">Stop BTC</button>
+      <button type="submit" (click)="resetBtc()" style="margin: 10px;" class="btn btn-danger ">Reset BTC</button>
     </div>
   </div>
   <div class="row">
@@ -13,13 +22,39 @@
             <th>Blockchain</th>
             <th>Source</th>
             <th>Hash</th>
+            <th>Parent Hash</th>
+            <th>Number</th>
+            <th>Timestamp</th>
+            <th>nonce</th>
+            <th>Difficulty</th>
+            <th>miner</th>
+            <th>Extra Data</th>
+            <th>Gas Used Hex</th>
+            <th>Gas Used isBigNumber</th>
+            <th>Transaction.hash</th>
+            <th>Transaction.from</th>
+            <th>Transaction.to</th>
+            <th>Transaction.value</th>
           </tr>
         </thead>
-        <tbody>
-          <tr *ngFor = "let b of blocks; let i=index">
+        <tbody  *ngFor = "let b of blocks; let i=index">
+          <tr *ngFor = "let t of b.body.transactions; let j=index">
             <td>{{b.blockchain}}</td>
             <td>{{b.source}}</td>
-            <td><a href="https://etherscan.io/block/{{b.body.hash}}" target="blank">{{b.body.hash}}</a></td>
+            <td>{{b.body.hash}}</td>
+            <td>{{b.body.parentHash}}</td>
+            <td>{{b.body.number}}</td>
+            <td>{{b.body.timestamp}}</td>
+            <td>{{b.body.nonce}}</td>
+            <td>{{b.body.difficulty}}</td>
+            <td>{{b.body.miner}}</td>
+            <td>{{b.body.extraData}}</td>
+            <td>{{b.body.gasUsed._hex}}</td>
+            <td>{{b.body.gasUsed._isBigNumber}}</td>
+            <td>{{t.hash}}</td>
+            <td>{{t.from}}</td>
+            <td>{{t.to}}</td>
+            <td>{{parseInt(t.value._hex)}}</td>
           </tr>
         </tbody>
       </table>
