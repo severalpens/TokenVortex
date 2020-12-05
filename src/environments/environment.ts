@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiDomain: "http://localhost:4000",
-  apiUrl: "http://localhost:4000/tokenvortex",
+  apiDomain: "http://localhost:9002",
+  apiUrl: "http://localhost:9002/tokenvortex",
   authUrl: "http://localhost:8001",
 
 };

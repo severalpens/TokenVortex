@@ -84,7 +84,8 @@ export class BlocksComponent implements OnInit {
   resetEth(){
     this.route.paramMap.subscribe((params) => {
       this.http.get(`${environment.apiDomain}/blocks/eth/reset`).subscribe((result) => {
-          location.reload();
+         // location.reload();
+         console.log(result)
       });
     });
   }
@@ -92,7 +93,8 @@ export class BlocksComponent implements OnInit {
   startEth(){
     this.route.paramMap.subscribe((params) => {
       this.http.get(`${environment.apiDomain}/blocks/eth/start`).subscribe((result) => {
-          location.reload();
+         // location.reload();
+         console.log(result)
       });
     });
   }
@@ -100,7 +102,8 @@ export class BlocksComponent implements OnInit {
   stopEth(){
     this.route.paramMap.subscribe((params) => {
       this.http.get(`${environment.apiDomain}/blocks/eth/stop`).subscribe((result) => {
-          location.reload();
+         // location.reload();
+         console.log(result)
       });
     });
   }
@@ -113,7 +116,8 @@ export class BlocksComponent implements OnInit {
   resetBtc(){
     this.route.paramMap.subscribe((params) => {
       this.http.get(`${environment.apiDomain}/blocks/btc/reset`).subscribe((result) => {
-          location.reload();
+         // location.reload();
+         console.log(result)
       });
     });
   }
@@ -121,7 +125,8 @@ export class BlocksComponent implements OnInit {
   startBtc(){
     this.route.paramMap.subscribe((params) => {
       this.http.get(`${environment.apiDomain}/blocks/btc/start`).subscribe((result) => {
-          location.reload();
+         // location.reload();
+         console.log(result)
       });
     });
   }
@@ -129,7 +134,8 @@ export class BlocksComponent implements OnInit {
   stopBtc(){
     this.route.paramMap.subscribe((params) => {
       this.http.get(`${environment.apiDomain}/blocks/btc/stop`).subscribe((result) => {
-          location.reload();
+         // location.reload();
+         console.log(result)
       });
     });
   }
