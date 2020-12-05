@@ -7,11 +7,16 @@
       <button type="submit" (click)="startEth()" style="margin: 10px;" class="btn btn-success ">Start Eth</button>
       <button type="submit" (click)="stopEth()" style="margin: 10px;" class="btn btn-secondary ">Stop Eth</button>
       <button type="submit" (click)="resetEth()" style="margin: 10px;" class="btn btn-danger ">Reset Eth</button>
+      <br>
+      <p>isRunning: {{isRunningEth}}</p>
     </div>
     <div class="col">
       <button type="submit" (click)="startBtc()" style="margin: 10px;" class="btn btn-success ">Start BTC</button>
       <button type="submit" (click)="stopBtc()" style="margin: 10px;" class="btn btn-secondary ">Stop BTC</button>
       <button type="submit" (click)="resetBtc()" style="margin: 10px;" class="btn btn-danger ">Reset BTC</button>
+      <br>
+      <p>isRunning: {{isRunningBtc}}</p>
+
     </div>
   </div>
   <div class="row">
@@ -49,12 +54,12 @@
             <td>{{b.body.difficulty}}</td>
             <td>{{b.body.miner}}</td>
             <td>{{b.body.extraData}}</td>
-            <td>{{b.body.gasUsed._hex}}</td>
-            <td>{{b.body.gasUsed._isBigNumber}}</td>
+            <!-- <td>{{b.body.gasUsed._hex}}</td>
+            <td>{{b.body.gasUsed._isBigNumber}}</td> -->
             <td>{{t.hash}}</td>
             <td>{{t.from}}</td>
             <td>{{t.to}}</td>
-            <td>{{parseInt(t.value._hex)}}</td>
+            <td>{{parseInt(t.value)}}</td>
           </tr>
         </tbody>
       </table>

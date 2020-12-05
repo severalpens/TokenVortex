@@ -57,6 +57,8 @@ export class BlocksComponent implements OnInit {
   block: Block;
   blocks: Array<Block>
 
+  isRunningEth: boolean;
+  isRunningBtc: boolean;
  
 
   constructor(
@@ -70,21 +72,37 @@ export class BlocksComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.paramMap.subscribe((params) => {
-      this.http.get(`${environment.apiDomain}/blocks/eth`).subscribe((blocks: Array<Block>) => {
-        this.blocks = blocks;
-      });
-    });
+      this.refresh();
   }
 
   refresh(){
-    location.reload();
-  }
+    this.blocks = new Array<Block>();
+    this.route.paramMap.subscribe((params) => {
+      this.http.get(`${environment.apiDomain}/blocks`).subscribe((blocks: Array<Block>) => {
+        blocks.forEach(block => {
+          console.log(block)
+          if(!block.body.transactions){
+            block.body.transactions = [{}];
+          }
+          this.blocks.push(block);
+        });
+      });
+    });
+    
+    this.http.get(`${environment.apiDomain}/blocks/eth/status`).subscribe((result:boolean) => {
+      this.isRunningEth  = result;
+    });
+
+    this.http.get(`${environment.apiDomain}/blocks/btc/status`).subscribe((result:boolean) => {
+      this.isRunningBtc  = result;
+    });
+
+}
 
   resetEth(){
     this.route.paramMap.subscribe((params) => {
       this.http.get(`${environment.apiDomain}/blocks/eth/reset`).subscribe((result) => {
-         // location.reload();
+         location.reload();
          console.log(result)
       });
     });
@@ -92,50 +110,50 @@ export class BlocksComponent implements OnInit {
 
   startEth(){
     this.route.paramMap.subscribe((params) => {
-      this.http.get(`${environment.apiDomain}/blocks/eth/start`).subscribe((result) => {
-         // location.reload();
-         console.log(result)
+      this.http.get(`${environment.apiDomain}/blocks/eth/start`).subscribe((result:boolean) => {
+      this.isRunningEth = result;
       });
     });
   }
 
   stopEth(){
     this.route.paramMap.subscribe((params) => {
-      this.http.get(`${environment.apiDomain}/blocks/eth/stop`).subscribe((result) => {
-         // location.reload();
-         console.log(result)
+      this.http.get(`${environment.apiDomain}/blocks/eth/stop`).subscribe((result:boolean) => {
+         this.isRunningEth  = result;
       });
     });
   }
   
-  parseInt(num: string){
-    return parseInt(num);
+  parseInt(value){
+    if(value){
+      return parseInt(value._hex);
+    }
+    else{
+      return '';
+    }
   }
 
 
   resetBtc(){
     this.route.paramMap.subscribe((params) => {
       this.http.get(`${environment.apiDomain}/blocks/btc/reset`).subscribe((result) => {
-         // location.reload();
-         console.log(result)
-      });
+         location.reload();
+        });
     });
   }
 
   startBtc(){
     this.route.paramMap.subscribe((params) => {
-      this.http.get(`${environment.apiDomain}/blocks/btc/start`).subscribe((result) => {
-         // location.reload();
-         console.log(result)
+      this.http.get(`${environment.apiDomain}/blocks/btc/start`).subscribe((result:boolean) => {
+         this.isRunningBtc = result;
       });
     });
   }
 
   stopBtc(){
     this.route.paramMap.subscribe((params) => {
-      this.http.get(`${environment.apiDomain}/blocks/btc/stop`).subscribe((result) => {
-         // location.reload();
-         console.log(result)
+      this.http.get(`${environment.apiDomain}/blocks/btc/stop`).subscribe((result:boolean) => {
+         this.isRunningBtc = result;
       });
     });
   }
