@@ -111,6 +111,7 @@ export class BlocksComponent implements OnInit {
     let blockTable = new BlockTable();
     blocks.forEach(block => {
       let row = {};
+      let rowPushed = false;
       for (const key in block) {
         const blockProp = block[key];
         if (typeof blockProp !== 'object' && blockProp !== null) {
@@ -127,21 +128,24 @@ export class BlocksComponent implements OnInit {
             if(bodyKey === 'transactions'){
               let transactions = bodyProp;
               transactions.forEach(tx => {
+                let txRow = {...row}
                 for(const txKey in tx){
                   const txProp = tx[txKey];
                   if (typeof txProp !== 'object' && txProp !== null) {
-                  blockTable.headers.includes(`body_transaction_${txKey}`) ?  null: blockTable.headers.push(`body_transaction_${txKey}`) ;
-                    row[`body_transaction_${txKey}`] = txProp;
+                    blockTable.headers.includes(`body_transaction_${txKey}`) ?  null: blockTable.headers.push(`body_transaction_${txKey}`) ;
+                    txRow[`body_transaction_${txKey}`] = txKey === 'data' ? txProp.slice(0,4): txProp;
                   }
                 }
+                blockTable.rows.push(txRow);
+                rowPushed = true;
               });
             }
           }
         }
       }
-      blockTable.rows.push(row);
+      rowPushed ? null: blockTable.rows.push(row);
     });
-
+    blockTable.rows = blockTable.rows.slice(0,30);
     return blockTable;
   }
 
