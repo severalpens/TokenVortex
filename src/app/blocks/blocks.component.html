@@ -21,45 +21,19 @@
   </div>
   <div class="row">
     <div class="col">
-      <table  class="table">
+      <table *ngIf="blockTable" class="table">
         <thead>
           <tr>
-            <th>Blockchain</th>
-            <th>Source</th>
-            <th>Hash</th>
-            <th>Parent Hash</th>
-            <th>Number</th>
-            <th>Timestamp</th>
-            <th>nonce</th>
-            <th>Difficulty</th>
-            <th>miner</th>
-            <th>Extra Data</th>
-            <th>Gas Used Hex</th>
-            <th>Gas Used isBigNumber</th>
-            <th>Transaction.hash</th>
-            <th>Transaction.from</th>
-            <th>Transaction.to</th>
-            <th>Transaction.value</th>
+            <th *ngFor = "let header of blockTable.headers; let i=index">{{header}}</th>
           </tr>
         </thead>
-        <tbody  *ngFor = "let b of blocks; let i=index">
-          <tr *ngFor = "let t of b.body.transactions; let j=index">
-            <td>{{b.blockchain}}</td>
-            <td>{{b.source}}</td>
-            <td>{{b.body.hash}}</td>
-            <td>{{b.body.parentHash}}</td>
-            <td>{{b.body.number}}</td>
-            <td>{{b.body.timestamp}}</td>
-            <td>{{b.body.nonce}}</td>
-            <td>{{b.body.difficulty}}</td>
-            <td>{{b.body.miner}}</td>
-            <td>{{b.body.extraData}}</td>
-            <!-- <td>{{b.body.gasUsed._hex}}</td>
-            <td>{{b.body.gasUsed._isBigNumber}}</td> -->
-            <td>{{t.hash}}</td>
-            <td>{{t.from}}</td>
-            <td>{{t.to}}</td>
-            <td>{{parseInt(t.value)}}</td>
+        <tbody>
+          <tr *ngFor = "let row of blockTable.rows; let j=index">
+            <td *ngFor = "let key of blockTable.headers; let i=index">
+              <span *ngIf="row[key]">
+                {{row[key]}}
+              </span>
+            </td>
           </tr>
         </tbody>
       </table>

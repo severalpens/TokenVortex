@@ -18,12 +18,23 @@ import {
   IEntity
 } from 'src/app/classes';
 
-class Block{
+class Block {
   _id?: string;
   blockchain: string;
   source: string;
   body: any;
 }
+
+
+class BlockTable {
+  constructor() {
+    this.headers = new Array<string>();
+    this.rows = new Array<any>();
+  }
+  headers: Array<string>;
+  rows: Array<any>;
+}
+
 
 @Component({
   selector: 'app-blocks',
@@ -40,26 +51,29 @@ export class BlocksComponent implements OnInit {
   methods: Array<Method>;
   log: any;
   entities: any[];
-  
-  
+
+  BlockVM: Array<Array<string>>;
+
   networks: Array<string>;
   network: string;
-  
+
   msgSender: Account;
   accounts: Array<Account>;
-  
+
   contracts: Array<Contract>;
   contract: Contract;
-  
+
   abi: Array<Method>;
   stepMethod: Method;
 
   block: Block;
-  blocks: Array<Block>
+  blocks: Array<Block>;
+
+  blockTable: BlockTable;
 
   isRunningEth: boolean;
   isRunningBtc: boolean;
- 
+
 
   constructor(
     private router: Router,
@@ -72,88 +86,120 @@ export class BlocksComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.refresh();
+    this.refresh();
   }
 
-  refresh(){
+  refresh() {
     this.blocks = new Array<Block>();
-    this.route.paramMap.subscribe((params) => {
-      this.http.get(`${environment.apiDomain}/blocks`).subscribe((blocks: Array<Block>) => {
-        blocks.forEach(block => {
-          console.log(block)
-          if(!block.body.transactions){
-            block.body.transactions = [{}];
+    this.http.get(`${environment.apiDomain}/blocks`).subscribe((blocks: Array<Block>) => {
+      this.blockTable = this.flattenBlocks(blocks);
+      console.log(this.blockTable)
+    });
+
+
+    this.http.get(`${environment.apiDomain}/blocks/eth/status`).subscribe((result: boolean) => {
+      this.isRunningEth = result;
+    });
+
+    this.http.get(`${environment.apiDomain}/blocks/btc/status`).subscribe((result: boolean) => {
+      this.isRunningBtc = result;
+    });
+
+  }
+
+  flattenBlocks(blocks: Array<Block>) {
+    let blockTable = new BlockTable();
+    blocks.forEach(block => {
+      let row = {};
+      for (const key in block) {
+        const blockProp = block[key];
+        if (typeof blockProp !== 'object' && blockProp !== null) {
+          blockTable.headers.includes(key) ?  null: blockTable.headers.push(key) ;
+          row[key] = blockProp;
+        }
+        if(key === 'body' && block.blockchain === 'Ethereum'){
+          for (const bodyKey in blockProp) {
+            const bodyProp = blockProp[bodyKey];
+            if (typeof bodyProp !== 'object' && bodyProp !== null) {
+              blockTable.headers.includes(`body_${bodyKey}`) ?  null: blockTable.headers.push(`body_${bodyKey}`) ;
+              row[`body_${bodyKey}`] = bodyProp;
+            }
+            if(bodyKey === 'transactions'){
+              let transactions = bodyProp;
+              transactions.forEach(tx => {
+                for(const txKey in tx){
+                  const txProp = tx[txKey];
+                  if (typeof txProp !== 'object' && txProp !== null) {
+                  blockTable.headers.includes(`body_transaction_${txKey}`) ?  null: blockTable.headers.push(`body_transaction_${txKey}`) ;
+                    row[`body_transaction_${txKey}`] = txProp;
+                  }
+                }
+              });
+            }
           }
-          this.blocks.push(block);
-        });
-      });
-    });
-    
-    this.http.get(`${environment.apiDomain}/blocks/eth/status`).subscribe((result:boolean) => {
-      this.isRunningEth  = result;
+        }
+      }
+      blockTable.rows.push(row);
     });
 
-    this.http.get(`${environment.apiDomain}/blocks/btc/status`).subscribe((result:boolean) => {
-      this.isRunningBtc  = result;
-    });
+    return blockTable;
+  }
 
-}
-
-  resetEth(){
+  resetEth() {
     this.route.paramMap.subscribe((params) => {
       this.http.get(`${environment.apiDomain}/blocks/eth/reset`).subscribe((result) => {
-         location.reload();
-         console.log(result)
+        location.reload();
+        console.log(result)
       });
     });
   }
 
-  startEth(){
+  startEth() {
     this.route.paramMap.subscribe((params) => {
-      this.http.get(`${environment.apiDomain}/blocks/eth/start`).subscribe((result:boolean) => {
-      this.isRunningEth = result;
+      this.http.get(`${environment.apiDomain}/blocks/eth/start`).subscribe((result: boolean) => {
+        this.isRunningEth = result;
       });
     });
   }
 
-  stopEth(){
+  stopEth() {
     this.route.paramMap.subscribe((params) => {
-      this.http.get(`${environment.apiDomain}/blocks/eth/stop`).subscribe((result:boolean) => {
-         this.isRunningEth  = result;
+      this.http.get(`${environment.apiDomain}/blocks/eth/stop`).subscribe((result: boolean) => {
+        this.isRunningEth = result;
       });
     });
   }
-  
-  parseInt(value){
-    if(value){
+
+  parseInt(value) {
+    if (value) {
       return parseInt(value._hex);
     }
-    else{
+    else {
       return '';
     }
   }
 
 
-  resetBtc(){
+  resetBtc() {
     this.route.paramMap.subscribe((params) => {
       this.http.get(`${environment.apiDomain}/blocks/btc/reset`).subscribe((result) => {
-         location.reload();
-        });
-    });
-  }
-
-  startBtc(){
-    this.route.paramMap.subscribe((params) => {
-      this.http.get(`${environment.apiDomain}/blocks/btc/start`).subscribe((result:boolean) => {
-         this.isRunningBtc = result;
+        location.reload();
       });
     });
   }
 
-  stopBtc(){
+  startBtc() {
     this.route.paramMap.subscribe((params) => {
-      this.http.get(`${environment.apiDomain}/blocks/btc/stop`).subscribe((result:boolean) => {
-         this.isRunningBtc = result;
+      this.http.get(`${environment.apiDomain}/blocks/btc/start`).subscribe((result: boolean) => {
+        this.isRunningBtc = result;
+      });
+    });
+  }
+
+  stopBtc() {
+    this.route.paramMap.subscribe((params) => {
+      this.http.get(`${environment.apiDomain}/blocks/btc/stop`).subscribe((result: boolean) => {
+        this.isRunningBtc = result;
       });
     });
   }
