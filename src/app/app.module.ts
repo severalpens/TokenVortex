@@ -43,6 +43,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BtcBalancesComponent } from './btc-balances/btc-balances.component';
 import { BlocksComponent } from './blocks/blocks.component';
+import { BlocksDiagramComponent } from './blocks-diagram/blocks-diagram.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { BlocksComponent } from './blocks/blocks.component';
     BtcBalancesComponent,
     BtcComponent,
     BlocksComponent,
+    BlocksDiagramComponent,
    
   ],
   imports: [

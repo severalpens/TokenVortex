@@ -21,6 +21,7 @@ import { BtcSettingsComponent } from './btc-settings/btc-settings.component';
 import { BtcInitComponent } from './btc-init/btc-init.component';
 import { BtcComponent } from './btc/btc.component';
 import {BlocksComponent} from './blocks/blocks.component';
+import { BlocksDiagramComponent } from './blocks-diagram/blocks-diagram.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -55,13 +56,14 @@ const routes: Routes = [
   { path: 'steps/:sequence_id/:step_id', component: StepsComponent}, 
   { path: 'user', component: UserComponent },
   { path: 'blocks', component: BlocksComponent },
+  { path: 'blocks/diagram', component: BlocksDiagramComponent },
   
 
 ];
 
 @NgModule({
   imports: [
-  RouterModule.forRoot(routes)
+RouterModule.forRoot(routes)
 ],
   exports: [RouterModule]
 })
