@@ -20,10 +20,9 @@ export class JwtInterceptor implements HttpInterceptor {
                     Authorization: `Bearer ${currentUser.token}`
                 }
             });
-            request.headers.append("Access-Control-Allow-Origin","*");
-            request.headers.append("Keep-Alive","timeout=5, max=100000");
-            
         }
+        request.headers.append("Access-Control-Allow-Origin","*");
+        request.headers.append("Keep-Alive","timeout=5, max=100000");
 
         return next.handle(request);
     }
