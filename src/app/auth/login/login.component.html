@@ -1,13 +1,15 @@
 <div class="col-md-6 offset-md-3 mt-5">
-    <div class="alert">
+    <div hidden class="alert">
         <div class="float-right">
             <a href="/register" class="align-right">Register</a>
         </div>
     </div>
     <div class="card">
+        **App is currently down. Apologies for inconvenience**.
+    </div>
+    <div hidden class="card">
         <div class="card-header">
             <h4>Login</h4>
-            
         </div>
         <div class="card-body">
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
