@@ -14,6 +14,7 @@ export class RegisterComponent implements OnInit {
     error = '';
     username: String;
     password: String;
+    isTemp: boolean;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -28,6 +29,7 @@ export class RegisterComponent implements OnInit {
         let random = randomWords();
         this.username = `${random}`;
         this.password = `${random}1`;
+        this.isTemp = false;
 
     }
 
@@ -36,6 +38,7 @@ export class RegisterComponent implements OnInit {
             username: [this.username, Validators.required],
             password: [this.password, Validators.required],
             confirmPassword: [this.password, Validators.required],
+            isTemp: [this.isTemp],
         });
 
         // get return url from route parameters or default to '/'
@@ -57,7 +60,7 @@ export class RegisterComponent implements OnInit {
         }
 
         this.loading = true;
-        this.authenticationService.register(this.f.username.value, this.f.password.value)
+        this.authenticationService.register(this.f.username.value, this.f.password.value, this.isTemp)
             .pipe(first())
             .subscribe(
                 data => {

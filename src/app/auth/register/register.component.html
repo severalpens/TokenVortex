@@ -24,12 +24,23 @@
                         <div *ngIf="f.confirmPassword.errors.required">Password Confirmation is required</div>
                     </div>
                 </div>
-                <button [disabled]="loading" class="btn btn-primary">
-                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                    Register
-                </button>
+                <div class="form-group" >
+                    <div style="width: 50px;">
+                        <!-- <label for="isTemp">Experimental (will be deleted after 30 days)</label> -->
+                        <input type="checkbox" formControlName="isTemp" class="form-control float-left"/>
+                    </div>
+                    <span>Experimental (will be deleted after 30 days)</span>
+                </div>
+                <br>
+                <div class="form-group">
+                    <button [disabled]="loading" class="btn btn-primary">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Register
+                    </button>
+
+                </div>
                 <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
-            </form>
+            </form> 
         </div>
     </div>
 </div>

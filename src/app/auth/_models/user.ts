@@ -6,4 +6,5 @@
     lastName: string;
     token?: string;
     user_id: string;
+    isTemp: boolean;
 }
