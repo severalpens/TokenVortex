@@ -3,10 +3,21 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  apiDomain: "http://localhost:9002",
-  apiUrl: "http://localhost:9002/tokenvortex",
-  authUrl: "http://localhost:8001",
+
+  apiDomain: "https://tokenvortexapi.herokuapp.com",
+  apiUrl: "https://tokenvortexapi.herokuapp.com/tokenvortex", 
+//  apiUrl: "http://localhost:9002/tokenvortex",
+ //apiUrl: "https://severalpensapi.herokuapp.com/tokenvortex",
+  authUrl: "https://severalpensauth.herokuapp.com",
+  // server = "https://severalpensapistaging.herokuapp.com/tokenvortex";
+// server = "http://localhost:9002/tokenvortex";
+
+
+
+  // production: false,
+  // apiDomain: "http://localhost:9002",
+  // apiUrl: "http://localhost:9002/tokenvortex",
+  // authUrl: "http://localhost:8001",
 
 };
 
